@@ -18,6 +18,9 @@ default[:exhibitor][:snapshot_dir] = "/tmp/zookeeper"
 default[:exhibitor][:transaction_dir] = "/tmp/zookeeper"
 default[:exhibitor][:log_index_dir] = "/tmp/zookeeper_log_indexes"
 
+# override to 
+#normal[:exhibitor][:hostname] 'http://localhost:8080'
+
 # Port for the HTTP Server
 default[:exhibitor][:opts][:port] = "8080"
 default[:exhibitor][:opts][:hostname] =  node[:ipaddress]

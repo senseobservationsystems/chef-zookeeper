@@ -90,9 +90,17 @@ template node[:exhibitor][:opts][:defaultconfig] do
     :defaultconfig => node[:exhibitor][:defaultconfig] )
 end
 
+ruby_block "set-zookeepers" do
+  block do
+    node.default[:exhibitor][:zookeepers] = discover_zookeepers(
+      node[:exhibitor][:hostname])
+  end
+  action :nothing
+end
+
 service "exhibitor" do
   provider Chef::Provider::Service::Upstart
   supports :start => true, :status => true, :restart => true
   action :start
+  notifies :create, "ruby_block[set-zookeepers]"
 end
-
