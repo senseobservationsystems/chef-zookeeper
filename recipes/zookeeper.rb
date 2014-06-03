@@ -25,7 +25,6 @@ include_recipe "build-essential"
 chef_gem "zookeeper"
 chef_gem "json"
 
-
 group node[:zookeeper][:group] do
   action :create
 end
@@ -35,6 +34,7 @@ user node[:zookeeper][:user] do
 end
 
 zk_basename = "zookeeper-#{node[:zookeeper][:version]}"
+node.default[:zookeeper][:mirror] = "http://mirrors.ibiblio.org/apache/zookeeper/zookeeper-#{node[:zookeeper][:version]}/zookeeper-#{node[:zookeeper][:version]}.tar.gz"
 
 remote_file ::File.join(Chef::Config[:file_cache_path], "#{zk_basename}.tar.gz") do
   owner "root"
